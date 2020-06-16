@@ -24,12 +24,28 @@ Route::group([
     //'prefix' => 'auth'
 
 ], function ($router) {
-
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
     Route::post('update', 'AuthController@update');
     Route::post('me', 'AuthController@me');
+    
+    //reset password
+   /*Route::post('create', 'API/PasswordResetController@create');
+    Route::get('find/{token}', 'API/PasswordResetController@find');
+    Route::post('reset', 'API/PasswordResetController@reset');*/
 });
 Route::post('getUsers','clientController@getUsers');
+
+
+/*
+Route::group([    
+    'middleware' => 'api',
+    //'namespace' => 'Auth',    
+    //'prefix' => 'password'
+], function () {    
+    Route::post('create', 'API\PasswordResetController@create');
+    Route::get('find/{token}', 'API/PasswordResetController@find');
+    Route::post('reset', 'API/PasswordResetController@reset');
+});*/
