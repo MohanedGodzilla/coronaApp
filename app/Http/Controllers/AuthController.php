@@ -106,7 +106,8 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
             'c_password' => 'required|same:password', 
-            'location' => 'required',
+            'lat' => 'required',
+            'long' => 'required',
         ]);
 
         if($validator->fails()){
@@ -132,8 +133,10 @@ class AuthController extends Controller
                 $user->phone =  $request->input('phone');
             if($request->input('address'))
                 $user->address =  $request->input('address');
-            if($request->input('location'))
-                $user->location =  $request->input('location');
+            if($request->input('lat'))
+                $user->lat =  $request->input('lat');
+                if($request->input('long'))
+                $user->long =  $request->input('long');
             if($request->input('beds'))
                 $user->beds =  $request->input('beds');
             if($request->input('price'))
