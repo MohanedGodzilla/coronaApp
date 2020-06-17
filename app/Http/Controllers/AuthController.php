@@ -36,9 +36,9 @@ class AuthController extends Controller
 
         if ($token = $this->guard()->attempt($credentials)) {
             $user = Auth::user();
-            return response()->json(compact('token','user'));
+            $user['token'] = $token;
+            return $user;
         }
-
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
@@ -117,8 +117,8 @@ class AuthController extends Controller
         $input['password'] = Hash::make($request->get('password'));
         $user = User::create($input);
         $token = JWTAuth::fromUser($user);
-
-        return response()->json(compact('token','user'),201);
+        $user['token'] = $token;
+        return $user;
     }
 
     public function update(Request $request) 
