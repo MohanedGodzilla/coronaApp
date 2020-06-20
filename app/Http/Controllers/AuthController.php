@@ -111,7 +111,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-                return response()->json($validator->errors()->toJson(), 400);
+            return response()->json(['error' => $validator->errors()->first()], 401);
         }
         $input = $request->all();
         $input['password'] = Hash::make($request->get('password'));
@@ -145,7 +145,7 @@ class AuthController extends Controller
             return response()->json($user); 
         }
         else{
-            return response()->json('you are logged out!' );
+            return response()->json(['error' => 'Unauthorized']);
         }
     }
 }
